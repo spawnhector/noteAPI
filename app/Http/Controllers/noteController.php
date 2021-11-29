@@ -24,7 +24,7 @@ class noteController extends Controller
             return response()->json(['success'=>'Note Added'],200);
         } else {
             return response()->json(['error'=>'Something went wrong'],202);
-        }
+        } 
         
     }
 

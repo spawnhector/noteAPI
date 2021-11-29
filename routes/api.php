@@ -17,16 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::group(['prefix' => 'note'], function() {
+        Route::get('/', [noteController::class,'notes']);
+        Route::post('/create', [noteController::class,'create']);
+        Route::post('/update', [noteController::class,'update']);
+        Route::delete('/delete/{id}', [noteController::class,'delete']);
+    });
 });
 
-Route::group(['prefix' => 'note'], function() {
-    Route::get('/', [noteController::class,'notes']);
-    Route::post('/create', [noteController::class,'create']);
-    Route::post('/update', [noteController::class,'update']);
-    Route::delete('/delete/{id}', [noteController::class,'delete']);
-});
 
 Route::post('/register', [userController::class,'register']);
 Route::post('/login', [userController::class,'login']);
